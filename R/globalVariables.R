@@ -1,0 +1,10 @@
+utils::globalVariables(c("DCI.produit",  "Nom.commercial.produit" ,
+                         "Voie.d.adm." ,                   "Unite.d.adm."                 ,
+                         "Heure.de.prise"      ,           "Posologie"                     ,
+                         "Si.besoin"               ,       "observation.ligne.prescription",
+                         "No.ligne.prescription"   ,       "Date.heure.debut.d.adm."       ,
+                         "Date.heure.fin.d.adm."    ,      "Rythme.date.de.debut"          ,
+                         "Rythme.nb.de.jours"      ,       "Rythme.periode"                ,
+                         "NIP.IPP"                  ,      "Sexe"                          ,
+                         "Age.en.debut.d.adm."      ,      "Poids"                         ,
+                         "Taille"                   ,      "IMC"))

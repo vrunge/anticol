@@ -1,5 +1,7 @@
 
-#' read_anticho
+
+#' read_antichol
+#'
 #' @description Reading a csv file of prescription data
 #' @param file file name
 #' @param sep separator
@@ -7,13 +9,15 @@
 #' @param header true or false
 #' @param quote quote parameter
 #' @param fill true or false (fill the non available data by NA)
+#' @param encoding Latin-1 or UTF-8
 #' @return a data.table object (see data.table package for further information)
-read_anticho <- function(file = "CH-Rouffach-Prescriptions-2008-2018_v1.txt.csv",
+read_antichol <- function(file = "../mydata/CH-Rouffach-Prescriptions-2008-2018_v1.txt.csv",
                          sep = "|",
                          dec = ".",
                          header = TRUE,
                          quote = "",
-                         fill = FALSE)
+                         fill = FALSE,
+                         encoding = "Latin-1")
 {
   PRESC <- data.table::fread(
     file = file,
@@ -22,13 +26,15 @@ read_anticho <- function(file = "CH-Rouffach-Prescriptions-2008-2018_v1.txt.csv"
     header = header,
     quote = quote,
     fill = fill,
-    check.names=T)
+    encoding = encoding,
+    check.names = T)
   return(PRESC)
 }
 
 
 
 #' standardize_variables
+#'
 #' @description changing variable type, process missing data
 #' @param data data table object
 #' @return standardized data.table object
@@ -40,23 +46,38 @@ standardize_variables <- function(data)
   data$Rythme.date.de.debut[data$Rythme.date.de.debut == ""] <- NA
   data$Taille[data$Taille < 1] <- NA
 
-  ### as character
-  data$DCI.produit <- as.character(data$DCI.produit)
-  data$Nom.commercial.produit <- as.character(data$Nom.commercial.produit)
-  data$observation.ligne.prescription <- as.character(data$observation.ligne.prescription)
-
   ### as double
-  data$IMC <- as.double(data$IMC)/100
+  data <- data %>% dplyr::mutate(IMC = as.double(IMC))
 
   ### as factor
-  data$Si.besoin = as.factor(data$Si.besoin)
-  data$Heure.de.prise = as.factor(data$Heure.de.prise)
+  data <- data %>% dplyr::mutate(Si.besoin = as.factor(Si.besoin))
+  data <- data %>% dplyr::mutate(Heure.de.prise = as.factor(Heure.de.prise))
 
+  ### as character
+  data <- data %>% dplyr::mutate(DCI.produit = as.character(DCI.produit))
+  data <- data %>% dplyr::mutate(Nom.commercial.produit = as.character(Nom.commercial.produit))
+  data <- data %>% dplyr::mutate(observation.ligne.prescription = tolower(observation.ligne.prescription))
 
-  data$Date.heure.debut.d.adm. <- as.POSIXct(as.character(data$Date.heure.debut.d.adm.),
-                                             format = "%d/%m/%Y %H:%M")
-  data$Date.heure.fin.d.adm. <- as.POSIXct(as.character(data$Date.heure.fin.d.adm.),
-                                           format = "%d/%m/%Y %H:%M")
+  ########## CONVERSION DES DATES
+  # Conversion de Rythme.date.de.debut en date
+  data <- data %>%
+    dplyr::mutate(Rythme.date.de.debut =
+             as.Date(Rythme.date.de.debut,
+                     format = "%d/%m/%Y"))
+
+  # Conversion de Date.heure.debut.d.adm.
+  # (date avec heures minutes)
+  data <- data %>%
+    dplyr::mutate(Date.heure.debut.d.adm. =
+             as.POSIXct(as.character(Date.heure.debut.d.adm.),
+                        format = "%d/%m/%Y %H:%M"))
+
+  # Conversion de Date.heure.fin.d.adm.
+  # (date avec heures minutes)
+  data <- data %>%
+    dplyr::mutate(Date.heure.fin.d.adm. =
+             as.POSIXct(as.character(Date.heure.fin.d.adm.),
+                        format = "%d/%m/%Y %H:%M"))
   return(data)
 }
 

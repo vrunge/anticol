@@ -1,5 +1,5 @@
 # anticol
 
-Package rassemblant les fonctions de traitement de données spécifique à un grand dataframe
+Package rassemblant les fonctions de traitement de données spécifiques à un grand dataframe.
 
-les données et leur analyse ne sont pas publiques 
+Les données sont anonymisées et leur analyse n'est pas en libre accès.

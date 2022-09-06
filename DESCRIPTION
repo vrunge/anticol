@@ -5,8 +5,9 @@ Version: 0.1.0
 Authors@R: c(
 	person("Vincent", "Runge", email = "vincent.runge@univ-evry.fr", role = c("aut", "cre")))
 Maintainer: Vincent Runge <vincent.runge@univ-evry.fr>
-Description: Analyse de donnees
+Description: Analyse de donnees. Ce package ne contient que les fonctions nécessaires à la transformation d'une base de donnees.
 License: MIT + file LICENSE
+Imports: data.table
 Encoding: UTF-8
 LazyData: true
-
+RoxygenNote: 7.2.1

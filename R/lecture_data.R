@@ -11,7 +11,7 @@
 #' @param fill true or false (fill the non available data by NA)
 #' @param encoding Latin-1 or UTF-8
 #' @return a data.table object (see data.table package for further information)
-read_antichol <- function(file = "../mydata/CH-Rouffach-Prescriptions-2008-2018_v1.txt.csv",
+read_antichol <- function(file = "../mydata/0_CH-Rouffach-Prescriptions-2008-2018_v1.txt.csv",
                          sep = "|",
                          dec = ".",
                          header = TRUE,
@@ -89,7 +89,6 @@ standardize_variables <- function(data)
 #' @return a data.table object
 delete_variables <- function(data, threshold = 0.1)
 {
-
   return(data)
 }
 

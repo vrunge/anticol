@@ -5,7 +5,7 @@
 \title{read_antichol}
 \usage{
 read_antichol(
-  file = "../mydata/CH-Rouffach-Prescriptions-2008-2018_v1.txt.csv",
+  file = "../mydata/0_CH-Rouffach-Prescriptions-2008-2018_v1.txt.csv",
   sep = "|",
   dec = ".",
   header = TRUE,

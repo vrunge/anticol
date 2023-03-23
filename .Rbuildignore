@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+analyses
+analyses_old
+mydata
+data_anonym

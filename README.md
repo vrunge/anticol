@@ -2,10 +2,9 @@
 
 Package rassemblant les fonctions de traitement de données spécifiques à un grand dataframe.
 
-Les données sont anonymisées et leur analyse n'est pas en libre accès.
+Les données sont anonymisées.
 
-
-Installation du package de fontions :
+Installation du package :
 
 ```r
 devtools::install_github("vrunge/anticol")
